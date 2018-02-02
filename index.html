@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>5 Day Weather Forecast</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+  
+  <script src="WeatherForecastViewModel.js"></script>
+</head>
+<body>
+
+<!-- Generic Header bar -->
+<nav class="navbar navbar-expand-md bg-info navbar-dark">
+  <a class="navbar-brand" href="#">5 Day Weather Forecast</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Live</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Test</a>
+      </li>
+    </ul>
+  </div> 
+</nav> 
+
+<!-- Main content -->
+<div class="container-fluid">
+  <div class="row">
+  <!-- Page Menu and options selection box -->
+    <div class="col-sm-3" style="padding: 0; padding-top: 1em">
+      <div class="jumbotron bg-success">
+		<div class="container">
+			<div class="row">
+				<div><strong>Options and or date time</strong></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Weather forecast display box -->
+    </div>
+    <div class="col-sm-9" style="padding-top: 1em">
+      <div class="jumbotron text-center">
+		  <h1>Weather Forecast</h1>
+		  <p>data...</p>
+		  <div id="root"> 
+			<div data-bind="text: testing" > <div/>
+		  </div>
+	</div>
+    </div>
+  </div>
+</div>
+  
+<script type="text/javascript"> 
+
+var WeatherForecastVM = new WeatherForecastViewModel();
+
+$(document).ready(function () {
+        ko.applyBindings(WeatherForecastVM, document.getElementById('root'));
+        WeatherForecastVM.GetData();
+});
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
