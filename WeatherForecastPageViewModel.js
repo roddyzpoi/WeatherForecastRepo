@@ -22,7 +22,6 @@ function WeatherForecastPageViewModel(options) {
     // ----------------------------------------------------------------- //
     // Observables to manage
     // ----------------------------------------------------------------- //    
-	//self.testing = ko.observable();
 	self.loading = ko.observable(true);
 	self.error = ko.observable(false);
 	
@@ -34,9 +33,8 @@ function WeatherForecastPageViewModel(options) {
             url: 'http://api.openweathermap.org/data/2.5/forecast?q=Glasgow,uk&units=metric&appid=1b9a4cf6f5eecebb884e5b6e7144cb98',
             dataType: 'json',
             success: function (message) {  
-				self.loading(false);
 				self.weatherForecast.Populate(message);
-				
+				self.loading(false);
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
                 self.loading(false);
@@ -46,3 +44,6 @@ function WeatherForecastPageViewModel(options) {
 	};
 	
 }
+
+
+
