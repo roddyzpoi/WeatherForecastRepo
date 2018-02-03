@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------- //
-// WeatherForecastViewModel ViewModel
+// WeatherForecastPageViewModel ViewModel
 // ----------------------------------------------------------------- //
-function WeatherForecastViewModel(options) {
+function WeatherForecastPageViewModel(options) {
 
     // ----------------------------------------------------------------- //
     // Make the self as 'this' reference
@@ -17,19 +17,32 @@ function WeatherForecastViewModel(options) {
     // ViewModels to manage
     // ----------------------------------------------------------------- //
 
-	self.dailyForecastList = ko.observableArray([]);
+	self.weatherForecast = new WeatherForecastViewModel();
 
     // ----------------------------------------------------------------- //
     // Observables to manage
     // ----------------------------------------------------------------- //    
-	self.testing = ko.observable();
+	//self.testing = ko.observable();
+	self.loading = ko.observable(true);
+	self.error = ko.observable(false);
 	
 	// ----------------------------------------------------------------- //
     // Public functions
     // ----------------------------------------------------------------- //
-	self.Populate = function(data){
-		for (var i = 0; i < data.list.length; i++) {
-            self.dailyForecastList.push(new DailyForecastViewModel(data.list[i]));
-        } 
+	self.GetData = function(){
+		$.ajax({
+            url: 'http://api.openweathermap.org/data/2.5/forecast?q=Glasgow,uk&units=metric&appid=1b9a4cf6f5eecebb884e5b6e7144cb98',
+            dataType: 'json',
+            success: function (message) {  
+				self.loading(false);
+				self.weatherForecast.Populate(message);
+				
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                self.loading(false);
+				self.error(true);
+            },
+        });
 	};
+	
 }

@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------- //
-// WeatherForecastViewModel ViewModel
+// DailyForecastViewModel ViewModel
 // ----------------------------------------------------------------- //
-function WeatherForecastViewModel(options) {
+function DailyForecastViewModel(data) {
 
     // ----------------------------------------------------------------- //
     // Make the self as 'this' reference
@@ -9,27 +9,35 @@ function WeatherForecastViewModel(options) {
     var self = this;
 
     // ----------------------------------------------------------------- //
-    // Options parameters
-    // ----------------------------------------------------------------- //
-    options = options || {};
-
-    // ----------------------------------------------------------------- //
     // ViewModels to manage
     // ----------------------------------------------------------------- //
-
-	self.dailyForecastList = ko.observableArray([]);
 
     // ----------------------------------------------------------------- //
     // Observables to manage
     // ----------------------------------------------------------------- //    
-	self.testing = ko.observable();
+	self.dateTimeText = ko.observable();
+	self.temperature = ko.observable();
+	self.pressure = ko.observable();
+	self.humidity = ko.observable();
+	self.weatherDescription = ko.observable();
+	self.weatherIcon = ko.observable();
+	self.windSpeed = ko.observable();
+	self.windDirection = ko.observable();
 	
 	// ----------------------------------------------------------------- //
     // Public functions
     // ----------------------------------------------------------------- //
 	self.Populate = function(data){
-		for (var i = 0; i < data.list.length; i++) {
-            self.dailyForecastList.push(new DailyForecastViewModel(data.list[i]));
-        } 
+		self.dateTimeText(data.dt_txt);
+		self.temperature(data.main.temp);
+		self.pressure(data.main.pressure);
+		self.humidity(data.main.humidity);
+		self.weatherDescription(data.weather[0].description);
+		self.weatherIcon(data.weather[0].icon);
+		self.windSpeed(data.wind.speed);
+		self.windDirection(data.wind.deg);	
 	};
+	
+		
+	self.Populate(data);
 }

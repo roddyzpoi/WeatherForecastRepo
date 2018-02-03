@@ -10,7 +10,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
   
+  <script src="WeatherForecastPageViewModel.js"></script>
   <script src="WeatherForecastViewModel.js"></script>
+  <script src="DailyForecastViewModel.js"></script>
 </head>
 <body>
 
@@ -52,7 +54,33 @@
 		  <h1>Weather Forecast</h1>
 		  <p>data...</p>
 		  <div id="root"> 
-			<div data-bind="text: testing" > <div/>
+			<!-- ko if: loading() -->
+			<div>...loading</div>
+			<!-- /ko -->
+			<!-- ko ifnot: loading() -->
+				<!-- ko if: error() -->
+				<div>...error</div>
+				<!-- /ko -->
+				<!-- ko ifnot: error() -->
+				<div>...loaded</div>
+				
+				<table class="table table-striped">
+					<tbody data-bind="foreach: weatherForecast.dailyForecastList()">
+						<tr>						
+							<td data-bind="text: $data.dateTimeText"></td>
+							<td data-bind="text: $data.temperature"></td>
+							<td data-bind="text: $data.pressure"></td>							
+							<td data-bind="text: $data.humidity"></td>
+							<td data-bind="text: $data.weatherDescription"></td>
+							<td data-bind="text: $data.weatherIcon"></td>
+							<td data-bind="text: $data.windSpeed"></td>
+							<td data-bind="text: $data.windDirection"></td>	
+						</tr>
+					</tbody>
+				</table>
+
+				<!-- /ko -->
+			<!-- /ko -->
 		  </div>
 	</div>
     </div>
@@ -61,11 +89,11 @@
   
 <script type="text/javascript"> 
 
-var WeatherForecastVM = new WeatherForecastViewModel();
+var WeatherForecastPageVM = new WeatherForecastPageViewModel();
 
 $(document).ready(function () {
-        ko.applyBindings(WeatherForecastVM, document.getElementById('root'));
-        WeatherForecastVM.GetData();
+        ko.applyBindings(WeatherForecastPageVM, document.getElementById('root'));
+        WeatherForecastPageVM.GetData();
 });
 
 </script>
