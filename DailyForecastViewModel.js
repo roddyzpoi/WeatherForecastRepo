@@ -94,12 +94,12 @@ function DailyForecastViewModel(data) {
 	function Populate(){
 		self.windSpeed(Math.floor((windSpeedSum/recordsTotal)));
 		self.windDirection(Math.floor((windDirectionSum/recordsTotal)));
-		self.pressure(Math.floor((pressureSum/recordsTotal)));
-		self.humidity(Math.floor((humiditySum/recordsTotal)));
-		self.humidity(Math.floor((windDirectionSum/recordsTotal)));
+		self.pressure(Math.floor((pressureSum/recordsTotal)) + ' mb');
+		self.humidity(Math.floor((humiditySum/recordsTotal)) + ' %');
+		self.windDirection(Math.floor((windDirectionSum/recordsTotal)));
 		
 		self.rainfall(rainfallTotal);
-		self.temperatureMin(temperatureMin);
+		self.temperatureMin(temperatureMin + " to " + temperatureMax + 'C');
 		self.temperatureMax(temperatureMax);
 	}
 	

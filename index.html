@@ -5,9 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
   
@@ -54,20 +54,17 @@
     </div>
     <div class="col-sm-9" style="padding-top: 1em">
       <div class="jumbotron text-center">
-		  <h1>Weather Forecast</h1>
-		  <p>data...</p>
+		  <h1>5 Day Weather Forecast</h1>
 		  <div id="root"> 
 			<!-- ko if: loading() -->
-			<div>...loading</div>
+			<div class="text-centre">...loading</div>
 			<!-- /ko -->
 			<!-- ko ifnot: loading() -->
 				<!-- ko if: error() -->
-				<div>...error</div>
+				<div class="text-centre">There has been an error loading the data</div>
 				<!-- /ko -->
 				<!-- ko ifnot: error() -->
-				<div>...loaded</div>
-				
-				<table class="table table-striped">
+				<!--<table class="table table-striped">
 					<tbody data-bind="foreach: weatherForecast.dailyForecastList()">
 						<tr>						
 							<td data-bind="text: $data.dateTimeText"></td>
@@ -83,8 +80,30 @@
 							<td data-bind="text: $data.rainfall"></td>	
 						</tr>
 					</tbody>
-				</table>
-
+				</table>-->
+				<div class="row" data-bind="foreach: weatherForecast.dailyForecastList()">
+					<div  >
+					<div class="card text-centre" style="width:200px;">
+						<div class="card-block">
+						
+							<div class="card">
+							  <div class="card-title" data-bind="text: $data.main"></div>
+							</div>
+							<div class="card">
+							  <div class="card-title" data-bind="text: $data.temperatureMin"></div>
+							</div>
+							<div class="card">
+							  <div class="card-title" data-bind="text: $data.pressure"></div>
+							</div>
+							<div class="card">
+							  <div class="card-title" data-bind="text: $data.humidity"></div>
+							</div>
+						</div>				 
+						<div class="card-footer"><strong data-bind="text: $data.dateTimeText"></strong></div>
+					</div>
+				</div>
+						
+			</div>
 				<!-- /ko -->
 			<!-- /ko -->
 		  </div>

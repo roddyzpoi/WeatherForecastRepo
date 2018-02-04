@@ -75,7 +75,7 @@ function WeatherForecastViewModel(options) {
 					tempDailyForecastList[dayCounter].AddThreeHourForecast(threeHourForecast[i]);
 				}
 				else {
-					tempDailyForecastList[dayCounter].dateTimeText(selectedDate.getDay() + ' ' + selectedDate.getDate());
+					tempDailyForecastList[dayCounter].dateTimeText(ReturnDay(selectedDate.getDay()) + ' ' + selectedDate.getDate());
 					tempDailyForecastList[dayCounter].AggregateToDaily();
 					
 					var tempSelectedDate = selectedDate;
@@ -88,7 +88,31 @@ function WeatherForecastViewModel(options) {
 			}			
 		}
 		
-		tempDailyForecastList[4].dateTimeText(selectedDate.getDay() + ' ' + selectedDate.getDate());
+		tempDailyForecastList[4].dateTimeText(ReturnDay(selectedDate.getDay()) + ' ' + selectedDate.getDate());
 		tempDailyForecastList[4].AggregateToDaily();
+	}
+	
+	function ReturnDay(day) {
+		if (day == 0){
+			return 'Sun';
+		}
+		if (day == 1){
+			return 'Mon';
+		}
+		if (day == 2){
+			return 'Tues';
+		}
+		if (day == 3){
+			return 'Wed';
+		}
+		if (day == 4){
+			return 'Thur';
+		}
+		if (day == 5){
+			return 'Fri';
+		}
+		if (day == 6){
+			return 'Sat';
+		}
 	}
 }
